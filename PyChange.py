@@ -81,9 +81,7 @@ if __name__ == "__main__":
     for c in cells:
     	seq = data[data[cell] == c][TF].dropna().values.tolist()
     	cp, p = solve(seq,method)
-    	print cp , p
     	changes = pd.concat((changes,pd.DataFrame({'CellID': [c]*len(cp), 'CP': cp, 'P': [p]*len(cp)})),ignore_index=True)
-    	print changes
 
     changes.to_csv('Changes'+name)
 
