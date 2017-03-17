@@ -30,14 +30,14 @@ python PyChange.py Filename CellID Values Method
 
 ## Output
 
-Is a `.csv` file. Columns are: CellID, Changepoint location, (Fishers) combined $p$-value.  
-**Warning:** The $p$-values are not corrected for multiple hypothesis testing when looking for more than one change!  
+Is a `.csv` file. Columns are: CellID, Changepoint location, (Fishers) combined *p*-value.  
+**Warning:** The *p*-values are not corrected for multiple hypothesis testing when looking for more than one change!  
 
 ## Remarks  
 
 Be carful:  
 - Either change in trend or change in mean - this is due to a two-sample TTest behind all the routines.  
-- For many changes, meaningful $p$-value can only be assigned to a combination of changes.   
+- For many changes, meaningful *p*-value can only be assigned to a combination of changes.   
 - General rule of thumb: Do not input sequences longer than 100!  
 
 ## Any questions?  
