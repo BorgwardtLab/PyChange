@@ -36,7 +36,6 @@ def Full_combinatorical(seq,offset=2):
     loc = TTest_combinatorical(seq,no,offset)
     p = _test_loc(seq,loc,offset)
     while p < p_prev:
-        print loc,p
         p_prev = p
         no = no + 1
         loc_prev = loc

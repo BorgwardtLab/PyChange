@@ -27,37 +27,37 @@ def solve(seq,method='single_diff'):
 		cp = TD.mc_p(diff(seq),0.05/len(seq))
 		p = TC._test_loc(seq,cp,2)
 	elif method == 'exact':
-		cp = TD.Full_combinatorical(seq)
+		cp = TC.Full_combinatorical(seq)
 		p = TC._test_loc(seq,cp,2)
 	elif method == 'exact_diff':
-		cp = TD.Full_combinatorical(diff(seq))
+		cp = TC.Full_combinatorical(diff(seq))
 		p = TC._test_loc(seq,cp,2)
 	elif 'exact' in method:
-		no = method[-1]
+		no = int(method[-1])
 		if 'diff' in method:
 			seq = diff(seq)
-		cp = TD.TTest_combinatorical(seq,no,2)
+		cp = TC.TTest_combinatorical(seq,no,2)
 		p = TC._test_loc(seq,cp,2)
 	elif 'ANOVA' in method:
 		if 'diff' in method:
 			seq = diff(seq)
-		cp = Optimal_ANOVA(seq,0.05/len(seq),2)
+		cp = TA.Optimal_ANOVA(seq,0.05,2)
 		p = TC._test_loc(seq,cp,2)
 	else:
 		print "Not a known module"
 		cp = [0]
 		p = 1.
+
 	if p > 1:
 		p = 1.
 	return cp, p
-
 
 def diff(seq):
 	return [i-j for i,j in zip(seq[1:],seq[:-1])]
 
 
 def init():
-	d = pd.DataFrame({'A': np.concatenate((np.cumsum(np.random.randn(50)),np.cumsum(np.random.randn(50)+1), np.cumsum(np.random.randn(100)))), 'B': np.concatenate((['C1']*100, ['C2']*100))})
+	d = pd.DataFrame({'A': np.concatenate((np.cumsum(np.random.randn(50)),np.cumsum(np.random.randn(50)+3), np.cumsum(np.random.randn(100)))), 'B': np.concatenate((['C1']*100, ['C2']*100))})
 	d.to_csv('random.csv')
 
 if __name__ == "__main__":
@@ -71,6 +71,8 @@ if __name__ == "__main__":
     cell = str(args.Cell)
     TF = str(args.TF)
     method = str(args.Type)
+
+    init()
 
     data = pd.read_csv(name)
     cells = data[cell].unique()
