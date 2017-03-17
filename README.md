@@ -25,7 +25,7 @@ python PyChange.py Filename CellID Values Method
 - `exact`: Exact method mines for multiple changes **carful: this is slow!!!**.   
 - `ANOVA`: Find all pairwise dissimilar subsequences.  
 - all methods can be combined with `_diff` for applying differences to the sequence
-- Try also `exact_diff_3` to find the three biggest changes in the exact method. 
+- Try also `exact_diff_3` to find the three biggest changes accoring to the exact method. 
 
 
 ## Output
@@ -36,7 +36,9 @@ Is a `.csv` file. Columns are: CellID, Changepoint location, (Fishers) combined 
 
 Be carful:  
 - Either change in trend or change in mean - this is due to a two-sample TTest behind all the routines.  
-- For many changes, meaningful $p$-value can only be assigned to a combination of changes.  
+- For many changes, meaningful $p$-value can only be assigned to a combination of changes.   
+- **Warning:** The $p$-values are not corrected for multiple hypothesis testing for method looking for more than one change!  
+
 
 ## Any questions?  
 
