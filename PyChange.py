@@ -85,7 +85,7 @@ if __name__ == "__main__":
     	changes = pd.concat((changes,pd.DataFrame({'CellID': [c]*len(cp), 'CP': cp, 'P': [p]*len(cp)})),ignore_index=True)
     	print changes
 
-    changes.to_csv('Changes'+name+'.csv')
+    changes.to_csv('Changes'+name)
 
     #Iterate over all unique Cell ids, get time series and apply Test
     # save in changes
