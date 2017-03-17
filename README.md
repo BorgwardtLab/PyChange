@@ -38,7 +38,7 @@ Be carful:
 - Either change in trend or change in mean - this is due to a two-sample TTest behind all the routines.  
 - For many changes, meaningful $p$-value can only be assigned to a combination of changes.   
 - **Warning:** The $p$-values are not corrected for multiple hypothesis testing when looking for more than one change!  
-
+- Do not input sequences longer than 100!  
 
 ## Any questions?  
 
