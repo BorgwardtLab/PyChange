@@ -57,7 +57,7 @@ def diff(seq):
 
 
 def init():
-	d = pd.DataFrame({'A': np.concatenate((np.cumsum(np.random.randn(50)),np.cumsum(np.random.randn(50)+3), np.cumsum(np.random.randn(100)))), 'B': np.concatenate((['C1']*100, ['C2']*100))})
+	d = pd.DataFrame({'A': np.concatenate((np.cumsum(np.random.randn(50)),np.cumsum(np.random.randn(50)+3), np.cumsum(np.random.randn(100)))), 'B': np.concatenate((['C1']*100, ['C2']*100)), 'T': range(200)})
 	d.to_csv('random.csv')
 
 if __name__ == "__main__":
@@ -65,12 +65,14 @@ if __name__ == "__main__":
     parser.add_argument('Filename', help='Filename with .csv extension as from QtFy.')
     parser.add_argument('Cell', help='CellId column name')
     parser.add_argument('TF', help='Expression level column name')
+    parser.add_argument('Time', help='timepoint column name')
     parser.add_argument('Type', help='Standard: single_diff. Type of method: single, DP, ANOVA and exact, possible with _diff for differences. For exact also possible exact_diff_3 for three changes on differences')
     args = parser.parse_args()
     name = str(args.Filename)
     cell = str(args.Cell)
     TF = str(args.TF)
     method = str(args.Type)
+    time = str(args.Time)
 
     init()
 
@@ -81,7 +83,7 @@ if __name__ == "__main__":
     for c in cells:
     	seq = data[data[cell] == c][TF].dropna().values.tolist()
     	cp, p = solve(seq,method)
-    	changes = pd.concat((changes,pd.DataFrame({'CellID': [c]*len(cp), 'CP': cp, 'P': [p]*len(cp)})),ignore_index=True)
+    	changes = pd.concat((changes,pd.DataFrame({'CellID': [c]*len(cp), 'CP': cp, 'P': [p]*len(cp), 'Timepoint': [data[(data[cell]==c) & (data[TF] ==seq[change])][time].values.tolist()[0] for change in cp]})),ignore_index=True)
 
     changes.to_csv('Changes'+name)
 
