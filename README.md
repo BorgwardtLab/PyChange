@@ -17,6 +17,7 @@ python PyChange.py Filename CellID Values Method
 `Filename`: Name of `.csv` File (e.g. from standard QtFy output).   
 `CellID`: Name of unique cell identification column.   
 `Values`: Column of intensities.  
+`Time`: Column of timepoints when recordings took place.  
 
 `Method`: Type of change detection method
 - `single_diff`: *standard* reports single biggest change on gradient sequence.  
@@ -30,14 +31,14 @@ python PyChange.py Filename CellID Values Method
 
 ## Output
 
-Is a `.csv` file. Columns are: CellID, Changepoint location, (Fishers) combined $p$-value.  
-**Warning:** The $p$-values are not corrected for multiple hypothesis testing when looking for more than one change!  
+Is a `.csv` file. Columns are: CellID, Changepoint location, (Fishers) combined *p*-value, Timepoint of change.  
+**Warning:** The *p*-values are not corrected for multiple hypothesis testing when looking for more than one change!  
 
 ## Remarks  
 
 Be carful:  
 - Either change in trend or change in mean - this is due to a two-sample TTest behind all the routines.  
-- For many changes, meaningful $p$-value can only be assigned to a combination of changes.   
+- For many changes, meaningful *p*-value can only be assigned to a combination of changes.   
 - General rule of thumb: Do not input sequences longer than 100!  
 
 ## Any questions?  
