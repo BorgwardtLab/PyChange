@@ -7,6 +7,7 @@ Insitute: D-BSSE at ETHZ
 import numpy as np
 import pandas as pd
 import TTest_combinatorical as TC
+import Exact as EX
 import TTest_divide as TD
 import TTest_ANOVA as TA
 import argparse
@@ -27,17 +28,14 @@ def solve(seq,method='single_diff'):
 		cp = TD.mc_p(diff(seq),0.05/len(seq))
 		p = TC._test_loc(seq,cp,2)
 	elif method == 'exact':
-		cp = TC.Full_combinatorical(seq)
-		p = TC._test_loc(seq,cp,2)
+		cp,p = EX.Exact(seq)
 	elif method == 'exact_diff':
-		cp = TC.Full_combinatorical(diff(seq))
-		p = TC._test_loc(seq,cp,2)
+		cp,p = EX.Exact(diff(seq))
 	elif 'exact' in method:
 		no = int(method[-1])
 		if 'diff' in method:
 			seq = diff(seq)
-		cp = TC.TTest_combinatorical(seq,no,2)
-		p = TC._test_loc(seq,cp,2)
+		cp,p = EX.Exact(seq,no)
 	elif 'ANOVA' in method:
 		if 'diff' in method:
 			seq = diff(seq)
