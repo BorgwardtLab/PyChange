@@ -3,7 +3,7 @@
 ## Quickstart:
 
 ```
-python PyChange.py random.csv B A single_diff
+python PyChange.py random.csv B A T single_diff
 ```
 
 computes the single biggest change in trend in two sequences stored in `random.csv`. One of the sequences has a significant trend change, the other does not.   
