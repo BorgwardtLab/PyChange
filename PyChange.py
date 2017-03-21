@@ -72,7 +72,7 @@ if __name__ == "__main__":
     method = str(args.Type)
     time = str(args.Time)
 
-    init()
+    #init()
 
     data = pd.read_csv(name)
     cells = data[cell].unique()
