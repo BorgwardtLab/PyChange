@@ -11,7 +11,7 @@ computes the single biggest change in trend in two sequences stored in `random.c
 ## Arguments explained. 
 
 ```
-python PyChange.py Filename CellID Values Method
+python PyChange.py Filename CellID Values Time Method
 ```
 
 `Filename`: Name of `.csv` File (e.g. from standard QtFy output).   
