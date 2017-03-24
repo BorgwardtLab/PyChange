@@ -38,7 +38,7 @@ Is a `.csv` file. Columns are: CellID, Changepoint location, (Fishers) combined 
 
 Be carful:  
 - Either a change in trend or a change in mean - this is due to a two-sample t-Test behind the routines.  
-- For many changes, the *p*-values are not corrected for multiple hypothesis testing. They can tehrefore not be interpreted as *p*-values. 
+- For many changes, the *p*-values are not corrected for multiple hypothesis testing. They can therefore not be interpreted as *p*-values. 
 - General rule of thumb: Do not input sequences longer than 100!  
 
 ## Any questions?  
