@@ -63,9 +63,9 @@ def Exact(seq,no=-1,offset=2,thres=0.05):
             return loc2,p2
         else:
             return [],1.
-
     #Look for more than three changes
-    indices = prune_min(seq,middle)
+    indices = prune_min(seq,middle,offset)
+    print indices
     locn,pn = Find_Best_Combination(seq,indices, Table,no)
     if no == len(locn):
         return locn,pn
@@ -86,7 +86,7 @@ def Exact(seq,no=-1,offset=2,thres=0.05):
 def Find_Best_Combination(seq,indices, Table,no=-1,offset=2):
     p = 1.
     best_loc = []
-    if no != -1:
+    if no == -1:
         for no_cp in range(4,len(indices)+1):
             #Iterate over number of changepoints and check every possible configuration of local minima
             for comb in itertools.combinations(indices,no_cp):
@@ -100,20 +100,23 @@ def Find_Best_Combination(seq,indices, Table,no=-1,offset=2):
             if len(best_loc) == no_cp-1:
                 return best_loc, p
     else:
-        loc = list( itertools.combinations(indices,no))
-        spacing = [loc[j]-loc[i] >= offset for i,j in zip(range(len(loc)-2),range(1,len(loc)-1))]
-        if all(spacing) and len(spacing)>0:
-            if Correction(test_loc(seq,loc,Table,offset),len(loc),seq,offset )< p:
-                p = Correction(test_loc(seq,loc,Table,offset),len(loc),seq,offset )
-                best_loc = loc
+        for comb in itertools.combinations(indices,no):
+            loc = list(comb)
+            spacing = [loc[j]-loc[i] >= offset for i,j in zip(range(len(loc)-2),range(1,len(loc)-1))]
+            if all(spacing) and len(spacing)>0:
+                if Correction(test_loc(seq,loc,Table,offset),len(loc),seq,offset )< p:
+                    p = Correction(test_loc(seq,loc,Table,offset),len(loc),seq,offset )
+                    best_loc = loc
     return best_loc,p
 
 #Look for local minimum in dictionary on checked changepoints
-def prune_min(seq,middle):
+def prune_min(seq,middle,offset):
     p_dir = 1
     p_local = 1.
     save_i = 0
     indices = []
+    min_start = 10
+    max_stop = 0
 
     for i in range(len(seq)):
         for j in range(len(seq)):
@@ -126,10 +129,16 @@ def prune_min(seq,middle):
                     elif middle[str(i)][2] > p_local:
                         if p_dir == -1:
                             indices.append(save_i)
+                            if int(middle[str(i)][0]) < min_start and int(middle[str(i)][0]) > offset :
+                                min_start = int(middle[str(i)][0]) 
+                            if int(middle[str(i)][1]) > max_stop and len(seq)-offset > int(middle[str(i)][1]):
+                                max_stop = int(middle[str(i)][1]) 
                             #print save_i, middle[str(save_i)]
                         p_dir = 1
                         p_local = middle[str(i)][2]
-    return indices
+    indices.append(min_start)
+    indices.append(max_stop)
+    return sorted(indices)
 
 
 
