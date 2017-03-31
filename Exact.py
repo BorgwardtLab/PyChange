@@ -102,7 +102,7 @@ def Find_Best_Combination(seq,indices, Table,no=-1,offset=2):
     else:
         for comb in itertools.combinations(indices,no):
             loc = list(comb)
-            spacing = [loc[j]-loc[i] >= offset for i,j in zip(range(len(loc)-2),range(1,len(loc)-1))]
+            spacing = [loc[j]-loc[i] >= offset for i,j in zip(range(len(loc)-1),range(1,len(loc)))]
             if all(spacing) and len(spacing)>0:
                 if Correction(test_loc(seq,loc,Table,offset),len(loc),seq,offset )< p:
                     p = Correction(test_loc(seq,loc,Table,offset),len(loc),seq,offset )
@@ -136,8 +136,10 @@ def prune_min(seq,middle,offset):
                             #print save_i, middle[str(save_i)]
                         p_dir = 1
                         p_local = middle[str(i)][2]
-    indices.append(min_start)
-    indices.append(max_stop)
+    if min_start not in indices:
+        indices.append(min_start)
+    if max_stop not in indices:
+        indices.append(max_stop)
     return sorted(indices)
 
 
