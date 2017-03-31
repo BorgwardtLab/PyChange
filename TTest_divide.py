@@ -14,12 +14,15 @@ import scipy.stats as stats
 import pandas as pd
 
 def mc_no(seq,no):
-    cp = []
-    p_vals = []
-    gen_id = []
-    dividereturn(seq,cp,p_vals,0,no+1,gen_id)
-    backtracking(cp,p_vals,gen_id,no) #remove until best "first" changes are found.
-    return sorted(cp)
+    if no == 1:
+        return [TTest(seq)[0]]
+    else:
+        cp = []
+        p_vals = []
+        gen_id = []
+        dividereturn(seq,cp,p_vals,0,no+1,gen_id)
+        backtracking(cp,p_vals,gen_id,no) #remove until best "first" changes are found.
+        return sorted(cp)
 
 def backtracking(cp,p_vals,gen_id,no):
     maxgen = np.max(gen_id)
