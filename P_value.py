@@ -8,6 +8,9 @@ import scipy.stats as stats
 #Why is this giving me too low p-vlaues?
 def Permutation(p,loc,seq,offset,test_loc=T.T_test_loc):
     no = len(seq)*int(np.log(1./p)+1.)
+    if no > 10000:
+        no = 10000
+    #print np.log(1./p), no
     counts = 1.
     #p_vals = []
     for i in range(no):
@@ -20,8 +23,10 @@ def Permutation(p,loc,seq,offset,test_loc=T.T_test_loc):
     #plt.show(block=True)
     #plt.clf()
     if counts > 1.:
+        #print "Permutation correction"
         p_corr = 1. * counts / no
     else:
+        #print "Bonferroni correction"
         p_corr = p*(len(seq)**len(loc)) #If there are no counts, take bonferroni correction
     return p_corr
 
