@@ -34,6 +34,7 @@ Store your time series in a .csv file and run PyChange.
 - `SMUCE`: For changes at different scales from the r-package [stepR](https://cran.r-project.org/web/packages/stepR/index.html).    
 - `WBS`: Stochastic method implemented in [wbs](https://cran.r-project.org/web/packages/wbs/index.html)   
 - `E-Divise`: Non-arametric method from the r-package [ecp](https://cran.r-project.org/web/packages/ecp/index.html).   
+- `BCP`: Bayesian changepoint analysis as in [bcp](https://cran.r-project.org/web/packages/bcp/index.html), returns posterior probabilities.  
 
 `--preprocessing`: Transformation of sequence before applying change detection. 
 - `none`: **default**  Raw sequence, for change in mean.   
@@ -69,6 +70,7 @@ Be carful:
 - Changes in differences have a high FN rate.     
 - `E-Divise` is slow.    
 - For the non-default methods, `r` and the desired package needs to be installed.      
+- The Bayesian methods return posterior probabilities for each point being a changepoint, the fequentist methdos report changes.  
 
 ## Any questions?  
 
