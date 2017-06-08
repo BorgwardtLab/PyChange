@@ -1,4 +1,4 @@
-# PyChange - Multiple change detection with python
+# PyChange - Multiple change detection with Python
 
 ## Quickstart
 
