@@ -1,0 +1,33 @@
+import numpy as np
+from PyChange import PyChange
+from matplotlib import pyplot as plt
+
+# plt.style.use('ggplot')
+#plt.style.use('fivethirtyeight')
+plt.rc('text', usetex=True)
+plt.rc('font', family='serif')
+plt.rc('font', size=16)
+
+
+if __name__ == "__main__":
+    r = np.random.RandomState(42)
+    seq = list(r.randn(200)) + list(r.randn(200) + 1.) + list(r.randn(200)) + list(r.randn(200) + 1.)
+    f, ((ax1, ax2, ax7), (ax3, ax4, ax8), (ax5, ax6, ax9)) = plt.subplots(3, 3, sharex=True, sharey=True, figsize=(10, 10))
+
+    axis = [ax1, ax2, ax3, ax4, ax5]
+    methods = ['MaChaMP', 'PELT', 'WBS', 'SMUCE', 'E-Divise']
+    color = ['cornflowerblue', 'darkred', 'darkorange', 'olive', 'gold', 'teal']
+
+    for a, m, c in zip(axis, methods, color):
+        a.plot(seq, color='black', alpha=0.5)
+        loc = PyChange(seq, method=m)
+        print m, loc
+        for l in loc:
+            a.axvline(l, color=c, linewidth=3)
+        a.set_title(r"$\texttt{" + m + "}$", fontsize=20, color=c)
+    ax6.set_xlabel('Time', fontsize=20)
+    ax3.set_ylabel('Values', fontsize=20)
+    ax1.set_xticks([200, 400, 600])
+    ax1.set_xlim((0, 800))
+    plt.tight_layout()
+    plt.savefig('Example.pdf')
