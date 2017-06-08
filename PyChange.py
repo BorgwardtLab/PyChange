@@ -17,6 +17,9 @@ from lib.SMUCE.SMUCE import SMUCE
 
 
 def PyChange(seq, transform='none', method='MaChaMP'):
+    """
+    Changepoint detection of input sequence
+    """
     tseq = preprocessing(seq, transform)
     cp = solve(tseq, method)
     return cp
