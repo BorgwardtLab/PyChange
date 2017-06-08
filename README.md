@@ -39,7 +39,7 @@ Store your time series in a .csv file and run PyChange.
 - `none`: **default**  Raw sequence, for change in mean.   
 - `diff`: Change detection of gradient sequecne.   
 - `logdiff`: To remove skewness in `diff`.  
-- `percdiff`: Percentile differences. Use when time series incements are interesting wrt on abs value, i.e. financial derrivatives.    
+- `percdiff`: Percentile differences for changes in intensities, i.e. fincancial derrivatives.    
 - `logpercdiff`:To remove skewness of `percdiff`. 
 
 If `--filename=Name.csv`, the output is a `ChangesName.csv` file. The columns are: CellID, Changepoint location, and timepoint of change.    
@@ -68,6 +68,7 @@ The function `PyChange` has three input variables:
 Be carful:  
 - Changes in differences have a high FN rate.     
 - `E-Divise` is slow.    
+- For the non-default methods, `r` and the desired package needs to be installed.      
 
 ## Any questions?  
 
