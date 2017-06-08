@@ -36,7 +36,7 @@ Store your time series in a .csv file and run PyChange.
 - `E-Divise`: Non-arametric method from the r-package [ecp](https://cran.r-project.org/web/packages/ecp/index.html).   
 
 `--preprocessing`: Transformation of sequence before applying change detection. 
-- `none`: raw sequence, for change in mean.  **default**. 
+- `none`: **default**  Raw sequence, for change in mean.   
 - `diff`: Change detection of gradient sequecne.   
 - `logdiff`: To remove skewness in `diff`.  
 - `percdiff`: Percentile differences. Use when time series incements are interesting wrt on abs value, i.e. financial derrivatives.    
