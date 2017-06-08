@@ -53,7 +53,7 @@ from PyChange import PyChange
 r = np.random.RandomState(42)
 seq = list(r.randn(200)) + list(r.randn(200) + 1.) + list(r.randn(200)) + list(r.randn(200) + 1.)
 
-cp = PyChange(seq, method='MaChaMP')
+cp = PyChange(seq)
 print cp
 ```
 
