@@ -1,14 +1,25 @@
 # PyChange - Multiple change detection with python
 
-## Quickstart:
+## Quickstart
+
+### Example1: Differences in two sequences.  
 
 ```
 python PyChange.py --filename=random.csv --cell=B --values=A --time=T --method=MaChaMP --preprocessing=diff
 ```
 
-computes the changes in trend in two sequences stored in `random.csv` with the `MaChaMP` method. One of the sequences has a significant trend change, the other does not.   
+Computes the changes in trend in two sequences stored in `random.csv` with the `MaChaMP` method. One of the sequences has a significant trend change, the other does not.   
 
-## Use as a script:   
+### Example2: Comparsion of methods.   
+
+```
+python Example.py
+```
+
+Creates the plot `Example.pdf` where each method is applied to the same step function.   
+
+
+## Use as a script   
 
 Store your time series in a .csv file and run PyChange.  
 
@@ -33,7 +44,7 @@ Store your time series in a .csv file and run PyChange.
 
 If `--filename=Name.csv`, the output is a `ChangesName.csv` file. The columns are: CellID, Changepoint location, and timepoint of change.    
 
-## Use as a Python module:  
+## Use as a module  
 
 ```
 from PyChange import PyChange
