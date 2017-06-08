@@ -47,10 +47,20 @@ If `--filename=Name.csv`, the output is a `ChangesName.csv` file. The columns ar
 ## Use as a module  
 
 ```
+import nump as np
 from PyChange import PyChange
+
+r = np.random.RandomState(42)
+seq = list(r.randn(200)) + list(r.randn(200) + 1.) + list(r.randn(200)) + list(r.randn(200) + 1.)
+
+cp = PyChange(seq, method='MaChaMP')
+print cp
 ```
 
-
+The function `PyChange` has three input variables:   
+`seq`: **required** The time seires as a list.  
+`transform`: the preprocessing as above. 
+`method`: the method as above.   
 
 
 ## Remarks  
