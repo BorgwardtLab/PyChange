@@ -18,7 +18,7 @@ python Example.py
 
 [`Example.pdf`, where all available methods are applied to the same step function.](./Example.pdf).  
 
-
+<img src="Example.pdf" alt="some text"  width="4200" height="4200">.    
 
 ## Use as a script   
 
