@@ -35,11 +35,11 @@ Store your time series in a .csv file and run PyChange.
 `--time`: Name of column of timepoints.    
 
 `--method`: Type of change detection method. 
-- `MaChaMP`: reports the biggest combination of changes with Welch's t-Test and a window method.   **default**. 
-- `PELT`: popular r-package based on dynamic programming.   
-- `SMUCE`: for changes at different scales.  
-- `WBS`: stochastic method, n^2.    
-- `E-Divise`: Based on dp, n^3   **carful: this is slow!!!**. 
+- `MaChaMP`: **default** reports the biggest configuration of changes using Welch's t-Test and dimensionalty analysis.     
+- `PELT`: Linear method from the popular r-package [changepoint](https://cran.r-project.org/web/packages/changepoint/index.html). 
+- `SMUCE`: For changes at different scales from the r-package [stepR](https://cran.r-project.org/web/packages/stepR/index.html).    
+- `WBS`: Stochastic method implemented in [wbs](https://cran.r-project.org/web/packages/wbs/index.html)   
+- `E-Divise`: Non-arametric method from the r-package [ecp](https://cran.r-project.org/web/packages/ecp/index.html).   
 
 `--preprocessing`: Transformation of sequence before applying change detection. 
 - `none`: raw sequence, for change in mean.  **default**. 
@@ -72,7 +72,8 @@ The function `PyChange` has three input variables:
 ## Remarks  
 
 Be carful:  
-- Changes in differences have a high FN rate 
+- Changes in differences have a high FN rate.     
+- `E-Divise` is slow.    
 
 ## Any questions?  
 
