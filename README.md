@@ -3,30 +3,26 @@
 ## Quickstart:
 
 ```
-python PyChange.py random.csv B A T single_diff
+python PyChange.py --filename=random.csv --cell=B --values=A --time=T --method=MaChaMP --preprocessing=diff
 ```
 
-computes the single biggest change in trend in two sequences stored in `random.csv`. One of the sequences has a significant trend change, the other does not.   
+computes the changes in trend in two sequences stored in `random.csv` with the `MaChaMP` method. One of the sequences has a significant trend change, the other does not.   
 
-## Arguments explained. 
+## Use as a script:  
 
-```
-python PyChange.py Filename CellID Values Time Method
-```
+Store your time series in a .csv file and run PyChange.
 
-`Filename`: Name of `.csv` File (e.g. from standard QtFy output).   
-`CellID`: Name of unique cell identification column.   
-`Values`: Column of intensities.  
-`Time`: Column of timepoints when recordings took place.  
+`--filename`: Name of `.csv` File (e.g. from standard QtFy output).   
+`--cell`: Name of unique time series identification column.   
+`--values`: Name of column of time-series values  
+`--time`: Name of column of timepoints.  
 
-`Method`: Type of change detection method
-- `single_diff`: *standard* reports single biggest change on gradient sequence.  
-- `single`: single biggest change in mean on raw sequence.  
-- `DP`: Dynamic programming method mines for multiple changes.  
-- `exact`: Exact method mines for multiple changes **carful: this is slow!!!**.   
-- `ANOVA`: Find all pairwise dissimilar subsequences.  **careful: This is not what you usually want**
-- all methods can be combined with `_diff` for applying differences to the sequence.  
-- Try also `exact_diff_3` to find the three biggest changes accoring to the exact method.  
+`--method`: Type of change detection method
+- `MaChaMP`: reports the biggest combination of changes with Welch's t-Test and a window method.   **default**
+- `PELT`: popular r-package based on dynamic programming.  
+- `WBS`: stochastic method, n^2.  
+- `SMUCE`: other method  
+- `E-Divise`: dp.   **carful: this is slow!!!**
 
 
 ## Output
