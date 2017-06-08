@@ -1,9 +1,3 @@
----
-title: "Readme"
-output: html_document
-bibliography: Refs.bib
----
-
 # PyChange - Change detection with Python
 
 ## Quickstart
@@ -64,9 +58,9 @@ print cp
 ```
 
 The function `PyChange` has three input variables:   
-`seq`: **required** The time seires as a list.  
-`transform`: the preprocessing as above.    
-`method`: the method as above.   
+- `seq`: **required** The time seires as a list.  
+- `transform`: the preprocessing as above.    
+- `method`: the method as above.   
 
 
 ## Remarks  
