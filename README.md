@@ -68,6 +68,7 @@ The function `PyChange` has three input variables:
 Be carful:  
 - Changes in differences have a high FN rate.     
 - `E-Divise` is slow.    
+- To the non-default methods, `r` and the desired package needs to be installed. `PyChange` calls them using `subprocess`.   
 
 ## Any questions?  
 
