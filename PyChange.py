@@ -14,6 +14,7 @@ from lib.E_Divise.E_Divise import E_Divise
 from lib.PELT.PELT import PELT
 from lib.WBS.WBS import WBS
 from lib.SMUCE.SMUCE import SMUCE
+from lib.BCP.BCP import BCP
 
 
 def PyChange(seq, transform='none', method='MaChaMP'):
@@ -40,6 +41,8 @@ def solve(seq, method):
         cp = SMUCE(seq)
     elif method == 'E-Divise':
         cp = E_Divise(seq)
+    elif method == 'BCP':
+        cp = BCP(seq)
     else:
         print "Not a known module"
         cp = [0]
@@ -102,7 +105,7 @@ if __name__ == "__main__":
     parser.add_argument('--cell', help='Cellid column name, separate time series have diffrent cell ids.')
     parser.add_argument('--values', help='Expression level column name')
     parser.add_argument('--time', help='timepoint column name')
-    parser.add_argument('--method', choices=['MaChaMP', 'PELT', 'WBS', 'SMUCE', 'E-Divise'], default='MaChaMP', help='Changepoint detection method')
+    parser.add_argument('--method', choices=['MaChaMP', 'PELT', 'WBS', 'SMUCE', 'E-Divise', 'BCP'], default='MaChaMP', help='Changepoint detection method')
     parser.add_argument('--preprocessing', choices=['none', 'diff', 'logdiff', 'percdiff', 'logpercdiff'], default='none', help='transformation of time series')
     args = parser.parse_args()
     name = str(args.filename)
