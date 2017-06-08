@@ -16,7 +16,8 @@ Computes the changes in trend in two sequences stored in `random.csv` with the `
 python Example.py
 ```
 
-Creates the plot `Example.pdf` where all available methods are applied to the same step function.   
+[`Example.pdf`, where all available methods are applied to the same step function.](./Example.pdf).  
+
 
 
 ## Use as a script   
