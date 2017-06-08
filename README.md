@@ -1,3 +1,9 @@
+---
+title: "Readme"
+output: html_document
+bibliography: Refs.bib
+---
+
 # PyChange - Change detection with Python
 
 ## Quickstart
