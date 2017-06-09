@@ -9,7 +9,7 @@ ts.xts <- read.zoo('./lib/Fpop/TS.csv',index=0)
 
 
 ser = as.numeric(ts.xts)
-cp = Fpop(ser,length(ser)/20)
+cp = Fpop(ser,2*log(length(ser)))
 
 #print(cp)
 
