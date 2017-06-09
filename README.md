@@ -28,12 +28,13 @@ Store your time series in a .csv file and run PyChange.
 `--time`: Name of column of timepoints.    
 
 `--method`: Type of change detection method. 
-- `MaChaMP`: **default** reports the biggest configuration of changes using Welch's t-Test and dimensionalty analysis.     
-- `PELT`: Linear method from the popular r-package [changepoint](https://cran.r-project.org/web/packages/changepoint/index.html). 
-- `SMUCE`: For changes at different scales from the r-package [stepR](https://cran.r-project.org/web/packages/stepR/index.html).    
+- `MaChaMP`: **default** reports the most significant configuration of changes.     
+- `PELT`: Linear method based on dynamic programming from the popular r-package [changepoint](https://cran.r-project.org/web/packages/changepoint/index.html). 
+- `SMUCE`: For changes at different scales using the r-package [stepR](https://cran.r-project.org/web/packages/stepR/index.html).    
 - `WBS`: Stochastic method implemented in [wbs](https://cran.r-project.org/web/packages/wbs/index.html)   
-- `E-Divise`: Non-arametric method from the r-package [ecp](https://cran.r-project.org/web/packages/ecp/index.html).   
-- `BCP`: Bayesian changepoint analysis as in [bcp](https://cran.r-project.org/web/packages/bcp/index.html)
+- `E-Divise`: Non-parametric offline from the r-package [ecp](https://cran.r-project.org/web/packages/ecp/index.html).   
+- `Lepage`: Non-parametric online with ARL0=500 using [cpm](https://cran.r-project.org/web/packages/cpm/index.html).   
+- `BCP`: Bayesian changepoint analysis from [bcp](https://cran.r-project.org/web/packages/bcp/index.html). 
 
 `--preprocessing`: Transformation of sequence before applying change detection. 
 - `none`: **default**  Raw sequence, for change in mean.   
