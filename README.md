@@ -40,7 +40,7 @@ Store your time series in a .csv file and run PyChange.
 - `none`: **default**  Raw sequence, for change in mean.     
 - `diff`: Change detection on gradient sequence, to remove linear dependencies   
 - `logdiff`: To remove multiplicative dependencies in `diff`.  
-- `percdiff`: Percentile differences for changes in intensities, i.e. fincancial derrivatives.    
+- `percdiff`: Percentile differences for changes in intensities.    
 - `logpercdiff`: To remove multiplicative dependiencies of `percdiff`. 
 
 If `--filename=Name.csv`, the output is a `ChangesName.csv` file. The columns are: CellID, Changepoint location, and timepoint of change.    
