@@ -37,11 +37,11 @@ Store your time series in a .csv file and run PyChange.
 - `BCP`: Bayesian changepoint analysis from [bcp](https://cran.r-project.org/web/packages/bcp/index.html). 
 
 `--preprocessing`: Transformation of sequence before applying change detection. 
-- `none`: **default**  Raw sequence, for change in mean.   
-- `diff`: Change detection on gradient sequence, for changes in Brownian motion.   
-- `logdiff`: To remove skewness in `diff`.  
+- `none`: **default**  Raw sequence, for change in mean.     
+- `diff`: Change detection on gradient sequence, to remove linear dependencies   
+- `logdiff`: To remove multiplicative dependencies in `diff`.  
 - `percdiff`: Percentile differences for changes in intensities, i.e. fincancial derrivatives.    
-- `logpercdiff`:To remove skewness of `percdiff`. 
+- `logpercdiff`: To remove multiplicative dependiencies of `percdiff`. 
 
 If `--filename=Name.csv`, the output is a `ChangesName.csv` file. The columns are: CellID, Changepoint location, and timepoint of change.    
 
