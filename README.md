@@ -33,7 +33,7 @@ Store your time series in a .csv file and run PyChange.
 - `SMUCE`: For changes at different scales using the r-package [stepR](https://cran.r-project.org/web/packages/stepR/index.html).    
 - [`WBS`](https://cran.r-project.org/web/packages/wbs/index.html): Stochastic method. 
 - `E-Divise`: Non-parametric offline from the r-package [ecp](https://cran.r-project.org/web/packages/ecp/index.html).    
-- `Lepage`: Non-parametric online with ARL0=500 using [cpm](https://cran.r-project.org/web/packages/cpm/index.html).   
+- `Lepage`: Non-parametric online method using [cpm](https://cran.r-project.org/web/packages/cpm/index.html).   
 - [`Segmentor3IsBack`](https://cran.r-project.org/web/packages/Segmentor3IsBack/index.html): An r-package for Seq-data.  
 - [`Fpop`](https://r-forge.r-project.org/R/?group_id=1851): OP using functional pruining for large data.   
 - [`BCP`](https://cran.r-project.org/web/packages/bcp/index.html): Bayesian changepoint analysis.   
