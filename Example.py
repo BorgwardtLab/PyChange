@@ -14,9 +14,9 @@ if __name__ == "__main__":
     seq = list(r.randn(200)) + list(r.randn(200) + 1.) + list(r.randn(200)) + list(r.randn(200) + 1.)
     f, ((ax1, ax2, ax7), (ax3, ax4, ax8), (ax5, ax6, ax9)) = plt.subplots(3, 3, sharex=True, sharey=True, figsize=(10, 10))
 
-    axis = [ax1, ax2, ax3, ax4, ax5, ax7]
-    methods = ['MaChaMP', 'PELT', 'WBS', 'SMUCE', 'E-Divise', 'BCP']
-    color = ['cornflowerblue', 'darkred', 'darkorange', 'olive', 'gold', 'teal']
+    axis = [ax1, ax2, ax3, ax4, ax5, ax7,ax6]
+    methods = ['MaChaMP', 'PELT', 'WBS', 'SMUCE', 'E-Divise', 'BCP','CPM']
+    color = ['cornflowerblue', 'darkred', 'darkorange', 'olive', 'gold', 'teal','salmon']
 
     for a, m, c in zip(axis, methods, color):
         a.plot(seq, color='black', alpha=0.5)
