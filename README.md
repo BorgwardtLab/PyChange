@@ -38,7 +38,7 @@ Store your time series in a .csv file and run PyChange.
 
 `--preprocessing`: Transformation of sequence before applying change detection. 
 - `none`: **default**  Raw sequence, for change in mean.   
-- `diff`: Change detection of gradient sequecne.   
+- `diff`: Change detection on gradient sequence, for changes in Brownian motion.   
 - `logdiff`: To remove skewness in `diff`.  
 - `percdiff`: Percentile differences for changes in intensities, i.e. fincancial derrivatives.    
 - `logpercdiff`:To remove skewness of `percdiff`. 
