@@ -36,7 +36,7 @@ Store your time series in a .csv file and run PyChange.
 - `Lepage`: Non-parametric online with ARL0=500 using [cpm](https://cran.r-project.org/web/packages/cpm/index.html).   
 - [`Segmentor3IsBack`](https://cran.r-project.org/web/packages/Segmentor3IsBack/index.html): An r-package for Seq-data.  
 - [`Fpop`](https://r-forge.r-project.org/R/?group_id=1851): OP using functional pruining for large data.   
-- `BCP`: Bayesian changepoint analysis from [bcp](https://cran.r-project.org/web/packages/bcp/index.html). 
+- [`BCP`](https://cran.r-project.org/web/packages/bcp/index.html): Bayesian changepoint analysis. 
 
 `--preprocessing`: Transformation of sequence before applying change detection. 
 - `none`: **default**  Raw sequence, for change in mean.     
