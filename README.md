@@ -34,6 +34,8 @@ Store your time series in a .csv file and run PyChange.
 - `WBS`: Stochastic method implemented in [wbs](https://cran.r-project.org/web/packages/wbs/index.html)   
 - `E-Divise`: Non-parametric offline from the r-package [ecp](https://cran.r-project.org/web/packages/ecp/index.html).   
 - `Lepage`: Non-parametric online with ARL0=500 using [cpm](https://cran.r-project.org/web/packages/cpm/index.html).   
+- [`Segmentor3IsBack`](https://cran.r-project.org/web/packages/Segmentor3IsBack/index.html): An r-package for Seq-data.  
+- [`Fpop`](https://r-forge.r-project.org/R/?group_id=1851): OP using functional pruining for large data.   
 - `BCP`: Bayesian changepoint analysis from [bcp](https://cran.r-project.org/web/packages/bcp/index.html). 
 
 `--preprocessing`: Transformation of sequence before applying change detection. 
@@ -63,13 +65,13 @@ The function `PyChange` has three input variables:
 - `transform`: the preprocessing as above.    
 - `method`: the method as above.   
 
-
 ## Remarks  
 
 Be carful:    
 - For the non-default methods, `r` and the desired package needs to be installed.      
 - `E-Divise` is slow.    
-- The Bayesian methods return posterior probabilities for each point being a changepoint, the fequentist methdos report changes.  
+- The Bayesian methods return posterior probabilities for each point being a changepoint.  
+- All methdos other than `MaChaMP` depend on parameters, which are set to the settings suggested in the documentation.   
 
 ## Any questions?  
 
