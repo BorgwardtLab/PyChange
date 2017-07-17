@@ -37,7 +37,9 @@ def solve(seq, method):
     """
     cp = []
     if method == 'MaChaMP':
-        cp = MaChaMP(seq)
+        C = MaChaMP(seq)
+        cp = C.changepoints
+        del C
     elif method == 'PELT':
         cp = PELT(seq)
     elif method == 'WBS':

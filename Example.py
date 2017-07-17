@@ -11,7 +11,7 @@ plt.rc('font', size=16)
 
 if __name__ == "__main__":
     r = np.random.RandomState(42)
-    seq = list(r.randn(200)) + list(r.randn(200) + 1.) + list(r.randn(200)) + list(r.randn(200) + 1.)
+    seq = list(r.randn(100)) + list(r.randn(100) + 3) + list(r.randn(100)) + list(r.randn(100) + 3)
     f, ((ax1, ax2, ax7), (ax3, ax4, ax8), (ax5, ax6, ax9)) = plt.subplots(3, 3, sharex=True, sharey=True, figsize=(10, 10))
 
     axis = [ax1, ax2, ax3, ax4, ax5, ax9, ax6, ax8, ax7]
@@ -33,7 +33,7 @@ if __name__ == "__main__":
         a.set_title(r"$\texttt{" + m + "}$", fontsize=20, color=c)
     ax6.set_xlabel('Time', fontsize=20)
     ax3.set_ylabel('Values', fontsize=20)
-    ax1.set_xticks([200, 400, 600])
-    ax1.set_xlim((0, 800))
+    ax1.set_xticks([100, 200, 300])
+    ax1.set_xlim((0, 400))
     plt.tight_layout()
     plt.savefig('Example.pdf')
