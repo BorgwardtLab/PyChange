@@ -5,7 +5,7 @@
 ### Example1: Differences in two sequences.  
 
 ```
-python PyChange.py --filename=random.csv --cell=B --values=A --time=T --method=MaChaMP --preprocessing=diff
+python PyChange.py --filename=random.csv --cell=B --values=A --time=T --method=PELT --preprocessing=diff
 ```
 
 Computes the changes in trend in two sequences stored in `random.csv` with the `MaChaMP` method. One of the sequences has a significant trend change, the other does not.   
