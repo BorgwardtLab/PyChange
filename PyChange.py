@@ -22,7 +22,7 @@ from lib.Segmentor3IsBack.Segmentor3IsBack import Segmentor3IsBack
 from lib.Fpop.Fpop import Fpop
 
 
-def PyChange(seq, transform='none', method='MaChaMP'):
+def PyChange(seq, transform='none', method='PELT'):
     """
     Changepoint detection of input sequence
     """
@@ -36,11 +36,11 @@ def solve(seq, method):
     Apply method to sequence
     """
     cp = []
-    if method == 'MaChaMP':
-        C = MaChaMP(seq)
-        cp = C.changepoints
-        del C
-    elif method == 'PELT':
+    # if method == 'MaChaMP':
+    #    C = MaChaMP(seq)
+    #    cp = C.changepoints
+    #    del C
+    if method == 'PELT':
         cp = PELT(seq)
     elif method == 'WBS':
         cp = WBS(seq)
@@ -68,6 +68,7 @@ def init_random_csv():
     """
     d = pd.DataFrame({'A': np.concatenate((np.cumsum(np.random.randn(50)), np.cumsum(np.random.randn(50) + 3), np.cumsum(np.random.randn(100)))), 'B': np.concatenate((['C1'] * 100, ['C2'] * 100)), 'T': range(200)})
     d.to_csv('random.csv')
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Computes changes in time sereis with python with different methods')
