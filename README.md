@@ -67,10 +67,10 @@ The function `PyChange` has three input variables:
 ## Remarks  
 
 Be carful:    
-- For the non-default methods, `r` and the desired package needs to be installed.      
+- `r` and the desired package needs to be installed.      
 - `E-Divise` is slow.    
 - The Bayesian methods return posterior probabilities for each point being a changepoint.  
-- All methdos other than `MaChaMP` depend on parameters, which are set to the settings suggested in the documentation.   
+- All methdos other are set to the settings suggested in repective the documentation.   
 
 ## Any questions?  
 
