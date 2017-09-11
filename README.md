@@ -27,9 +27,8 @@ Store your time series in a .csv file and run PyChange.
 `--values`: Name of column of time-series values    
 `--time`: Name of column of timepoints.    
 
-`--method`: Type of change detection method. 
-- `MaChaMP`: **default** reports the most significant configuration of changes.     
-- `PELT`: Linear method based on dynamic programming from the popular r-package [changepoint](https://cran.r-project.org/web/packages/changepoint/index.html). 
+`--method`: Type of change detection method.   
+- `PELT`: **default** Linear method based on dynamic programming from the popular r-package [changepoint](https://cran.r-project.org/web/packages/changepoint/index.html). 
 - `SMUCE`: For changes at different scales using the r-package [stepR](https://cran.r-project.org/web/packages/stepR/index.html).    
 - [`WBS`](https://cran.r-project.org/web/packages/wbs/index.html): Stochastic method. 
 - `E-Divise`: Non-parametric offline from the r-package [ecp](https://cran.r-project.org/web/packages/ecp/index.html).    
