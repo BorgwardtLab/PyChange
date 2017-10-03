@@ -10,14 +10,14 @@ struct MCP{
 */
 
 
-MCP CUSUM(std::vector<double> sequence,  std::function<MC(std::vector<int> &,std::vector<MeanStd> &, bool, bool)> Test);
+MCP CUSUM(std::vector<double> sequence);
 
 
 
 
 
 
-MCP CUSUM(std::vector<double> sequence, std::function<MC(std::vector<int> &,std::vector<MeanStd> &, bool, bool)> Test){
+MCP CUSUM(std::vector<double> sequence){
 
     //Init CUSUM std. control parameters. (CUMULATIVE SUM CONTROL CHARTING: AN UNDERUTILIZED SPC TOOL; DOUGLAS M. HAWKINS). No life or death choice
     double k = 0.25; //  0.75;  // 1.0; // 0.5; //     1.5;  //    0.25; // 0.75; 1.0; 1.25; 1.5;  // \mu \pm k * \sigma

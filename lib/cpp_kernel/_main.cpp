@@ -10,15 +10,14 @@ extern "C" {
         // It is possible to change the testing function here, K-S test or Mann-Whitney, for instance
         std::vector<double> seq(arr, arr + length);
         MCP Result;
-        std::cout << TEST << std::endl;
         if (strcmp(TEST,"MaChaMP")==0 ){
             Result = MaChaMP(seq,Multiple_TTest);
         }
         else if(strcmp(TEST,"CUSUM")==0 ){
-            Result = CUSUM(seq,Multiple_TTest);
+            Result = CUSUM(seq);
         }
         else if(strcmp(TEST,"EWMA")==0 ){
-
+            Result = EWMA(seq);
         }
         else {
             std::cout<< "Unrecognized testing framework" << std::endl;

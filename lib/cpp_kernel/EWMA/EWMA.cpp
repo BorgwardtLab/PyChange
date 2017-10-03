@@ -10,67 +10,86 @@ struct MCP{
 */
 
 
-MCP CUSUM(std::vector<double> sequence,  std::function<MC(std::vector<int> &,std::vector<MeanStd> &, bool, bool)> Test);
+MCP EWMA(std::vector<double> sequence);
 
 
 
 
 
 
-MCP CUSUM(std::vector<double> sequence, std::function<MC(std::vector<int> &,std::vector<MeanStd> &, bool, bool)> Test){
-
-    //Init CUSUM std. control parameters. (CUMULATIVE SUM CONTROL CHARTING: AN UNDERUTILIZED SPC TOOL; DOUGLAS M. HAWKINS). No life or death choice
-    double k = 0.25; //  0.75;  // 1.0; // 0.5; //     1.5;  //    0.25; // 0.75; 1.0; 1.25; 1.5;  // \mu \pm k * \sigma
-    double h = 8.01;  //  3.34; // 2.52; // 4.77; //    1.61; //   3.34; 2.52; 1.99; 1.61;
-
-    int skip = 3;
-    int min_dist = skip;
-    int run_length = 0;
+MCP EWMA(std::vector<double> sequence){
+    /*
+    def EMWA(seq, parameters=[0.11, 3.74], onset=30): #does not work
+    l = parameters[0] #recommended 0.05-0.2
+    L = parameters[1] # recommended 3 for l<0.1, 2.6-2.8 for l>0.1
+    k = onset #onset
+    if len(seq) < k:
+        print "Sequence too short EWMA"
+        return 0
+    hit = 0
+    mu0 = np.mean(seq[:k])
+    z = mu0
+    test = [z]
+    sig = np.std(seq[:k])
+    diff = L * sig * np.sqrt(l/(2-l)) #statistical quality control 9.27 9.28
+    for i in xrange(0,k):
+        z = l*seq[i] + (1-l)*z #statistical quality control 9.22
+        test.append(z)
+    for i in xrange(k,len(seq)):
+        z = l*seq[i] + (1-l)*z #statistical quality control 9.22
+        test.append(z)
+        if np.abs(z-mu0)>diff:
+            hit = i
+            #check = diff-np.mean(seq[:i])-np.abs(z)
+            break
+    return hit#, test,mu0,diff
+    */
 
     MCP Return_MCP;
+    double l = 0.05;
+    double L = 3.7;
+    int burn_in_length = 30;
 
     double mean = 0.;
-    double M2 = 0;
-    double stat_u = 0.;
-    double stat_l = 0.;
-    double prev_stat_u = 0;
-    double prev_stat_l = 0;
+    double mean0 = 0;
+    double M2 = 0.;
+    double diff = 0;
+    double z = 0.;
 
-    int i = 1;
-    while (i<sequence.size()){
+    int i = 0;
+    int k = i;
+    int run_length = 0;
+    int skip = burn_in_length;
+    while (i < sequence.size()){
         run_length++;
         Welford(mean,M2,run_length,sequence[i-1]);
-
         if(i>skip){
-            // p.418, Introduction to statistical quality control (Montgomery)
-            stat_u =  (sequence[i-1] - mean - (k/(M2/run_length))) +prev_stat_u;
-            stat_l =  (mean - (k/(M2/run_length)) - sequence[i-1] ) +prev_stat_l;
-            if (stat_u < 0){
-                stat_u = 0;
-            }
-            if (stat_l < 0){
-                stat_l = 0;
-            }
-
-            if (stat_u> h || stat_l > h){
+            z = l*sequence[i] + (1-l)*z;
+            if(std::abs(z-mean0)>diff){
                 Return_MCP.locations.push_back(i);
-                skip = i+min_dist;
+                skip = i+burn_in_length;
 
-                // Restart: Set values to zero again
-                mean = 0.;
-                M2 = 0.;
-                stat_u = 0.;
-                stat_l = 0.;
+                mean = 0;
+                M2 = 0;
                 run_length = 0;
             }
-            prev_stat_u=stat_u;
-            prev_stat_l=stat_l;
+        }
+        else if(i==skip){
+            mean0 = mean;
+            z = mean;
+            k = i-burn_in_length;
+            while (k<=burn_in_length){
+                z = l*sequence[k] + (1-l)*z;
+                k++;
+            }
+
+            diff = L * std::sqrt(l/(2-l)) *M2/(run_length) ; //stat quality control 9.27&9.28
         }
 
         i++;
     }
 
-    Return_MCP.threshold = h;
+    Return_MCP.threshold = burn_in_length;
 
     return Return_MCP;
 }
