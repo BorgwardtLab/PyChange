@@ -1,7 +1,3 @@
-#include "../Algorithms.cpp"
-
-
-
 std::tuple<double, double> boxlen(int k, int n, double u, int big_k) {
     double level = std::pow(2,k-big_k);
     return std::make_tuple(level*n,level*u);

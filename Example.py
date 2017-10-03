@@ -15,7 +15,7 @@ if __name__ == "__main__":
     f, ((ax1, ax2, ax7), (ax3, ax4, ax8), (ax5, ax6, ax9)) = plt.subplots(3, 3, sharex=True, sharey=True, figsize=(10, 10))
 
     axis = [ax1, ax2, ax3, ax4, ax5, ax9, ax6, ax8, ax7]
-    methods = ['none', 'PELT', 'WBS', 'SMUCE', 'E-Divise', 'BCP', 'Lepage', 'Segmentor3IsBack', 'Fpop']
+    methods = ['CUSUM', 'PELT', 'WBS', 'SMUCE', 'E-Divise', 'BCP', 'Lepage', 'Segmentor3IsBack', 'Fpop']
     color = ['black', 'darkred', 'darkorange', 'olive', 'gold', 'teal', 'salmon', 'steelblue', 'rosybrown']
 
     for a, m, c in zip(axis, methods, color):

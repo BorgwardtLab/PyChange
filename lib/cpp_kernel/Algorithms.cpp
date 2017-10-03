@@ -42,6 +42,13 @@ std::vector<size_t> topk_index(std::vector<T> const& values, int k) {
     return indices;
 }
 
+// Welford algorithm for mean and variance update online
+void Welford(double &mean, double &M2, int n, double &datapoint) {
+    mean += (datapoint - mean)/n;
+    M2 += std::pow(datapoint - mean,2);
+    //double variance = M2/(n - 1);
+}
+
 // N choose k
 unsigned long nChoosek( unsigned n, unsigned k )
 {

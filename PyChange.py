@@ -11,7 +11,7 @@ import argparse
 from lib.Preprocessing import preprocessing
 
 
-from lib.MaChaMP.MaChaMP import MaChaMP
+from lib.cpp_kernel.cppChange import CppChange
 from lib.E_Divise.E_Divise import E_Divise
 from lib.PELT.PELT import PELT
 from lib.WBS.WBS import WBS
@@ -36,11 +36,11 @@ def solve(seq, method):
     Apply method to sequence
     """
     cp = []
-    # if method == 'MaChaMP':
-    #    C = MaChaMP(seq)
-    #    cp = C.changepoints
-    #    del C
-    if method == 'PELT':
+    if method in ['MaChaMP', 'CUSUM', 'EWMA']:
+        C = CppChange(seq, method)
+        cp = C.changepoints
+        del C
+    elif method == 'PELT':
         cp = PELT(seq)
     elif method == 'WBS':
         cp = WBS(seq)

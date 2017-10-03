@@ -3,7 +3,7 @@
 To compile it and run the test, enter:
 g++ -std=c++14 -c -fPIC _main.cpp -o MC.o
 g++ -shared -Wl,-install_name,MC.so -o MC.so MC.o
-python FracGrad.py
+python cppChange.py
 """
 
 
@@ -18,7 +18,7 @@ from ctypes import *
 
 def create_lib(n):
     class Vector(object):
-        lib = cdll.LoadLibrary('./lib/MaChaMP/MC.so')  # class level loading lib
+        lib = cdll.LoadLibrary('./lib/cpp_kernel/MC.so')  # class level loading lib
         lib.new_vector.restype = c_void_p
         lib.new_vector.argtypes = []
         lib.delete_vector.restype = None
@@ -59,22 +59,17 @@ def create_lib(n):
 
     return Vector
 
-# MaChaMP
-# A multiple changepoint detection algorithm in C++
-# seq is the time series as a Python List
-# Attributes: changepoints, window, p, duration
 
+class CppChange:
 
-class MaChaMP:
-
-    def __init__(self, seq):
+    def __init__(self, seq, method):
         gc.collect()
 
         Vector = create_lib(len(seq))
         test = Vector()
 
         start = time.time()
-        loc = test.change("Welch-Fisher", seq)
+        loc = test.change(method, seq)
         self.duration = time.time() - start
 
         number = int(test[0])
