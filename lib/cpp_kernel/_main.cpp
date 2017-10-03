@@ -2,6 +2,7 @@
 #include "./MaChaMP/MaChaMP.cpp"
 #include "./CUSUM/CUSUM.cpp"
 #include "./EWMA/EWMA.cpp"
+#include "./QChart/QChart.cpp"
 
 
 extern "C" {
@@ -18,6 +19,9 @@ extern "C" {
         }
         else if(strcmp(TEST,"EWMA")==0 ){
             Result = EWMA(seq);
+        }
+        else if(strcmp(TEST,"QChart")==0 ){
+            Result = QChart(seq);
         }
         else {
             std::cout<< "Unrecognized testing framework" << std::endl;
