@@ -1,7 +1,7 @@
 
 #include "TwoSampleTests.cpp"
 #include "Vector_arithmetics.cpp"
-#include <boost/math/distributions/chi_squared.hpp> //Difficult for windows
+#include "chi_sq.hpp"//Difficult for windows
 #include <limits>
 
 
@@ -38,10 +38,12 @@ long double LogComb(std::vector<Changepoint> &Changes){
 
 }
 
+//boost::math::chi_squared_distribution<long double> distcq(1);
 
 long double Chisq(long double logp,int dof){
-    boost::math::chi_squared dist(dof);
-    return  boost::math::cdf(boost::math::complement(dist, std::abs(logp)));
+    //distcq.m_df =dof;
+    boost::math::chi_squared_distribution<long double> distcq(dof);
+    return  boost::math::cdf(boost::math::complement(distcq, std::abs(logp)));
 }
 
 //Combine p-values of multiple tests under fishers method

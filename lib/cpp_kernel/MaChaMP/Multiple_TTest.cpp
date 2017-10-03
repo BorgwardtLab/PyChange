@@ -1,7 +1,7 @@
 #include "Fisher.cpp"
 
 
-MC Multiple_TTest(std::vector<int> &locations,std::vector<MeanStd> &Table, bool Fish, bool Mid);
+void Multiple_TTest(std::vector<int> &locations,std::vector<MeanStd> &Table, bool Fish, bool Mid, MC& Returning, std::vector<MeanStd>& List_of_Stats);
 bool check_setting(std::vector<int> locations, std::vector<double> seq);
 std::vector<MeanStd> Create_Table(std::vector<double>seq);
 MeanStd updating(double m, double m1, double v, double v1,double n, double n1);
@@ -65,19 +65,57 @@ MeanStd updating(double m, double m1, double v, double v1,double n, double n1){
 	return MS2;
 }
 
+std::vector<long double> Test_lookup(std::vector<int> Candidates, std::vector<MeanStd> &Table,std::function<void(std::vector<int> &,std::vector<MeanStd> &, bool, bool,MC&, std::vector<MeanStd>& )> Test){
+	Candidates.insert(Candidates.begin(),0);
+	Candidates.push_back(Table.size()-1);
+	std::vector<long double> TTest_vals(Candidates.size()*Candidates.size()*Candidates.size());
+	MC Testresult;
+	std::vector<MeanStd> List_of_Stats;
+	std::vector<int> loc(3);
+	for(int i = 0; i<Candidates.size()-2; i++){
+		for (int j = i+1; j< Candidates.size()-1; j++){
+			for (int k=j+1; k < Candidates.size(); k++){
+				if (i != 0 && k != Candidates.size()-1){
+					loc = {Candidates[i],Candidates[j],Candidates[k]};
+					Test(loc,Table,false,true,Testresult,List_of_Stats);
+					TTest_vals[i+j*Candidates.size()+k*Candidates.size()*Candidates.size()]=Testresult.p;
+				}
+				else if (i == 0 && k == Candidates.size()-1){
+					loc = {Candidates[j]};
+					Test(loc,Table,false,false,Testresult,List_of_Stats);
+					TTest_vals[i+j*Candidates.size()+k*Candidates.size()*Candidates.size()]=Testresult.Change[0].p;
+				}
+				else if (i == 0){
+					loc = {Candidates[j],Candidates[k]};
+					Test(loc,Table,false,false,Testresult,List_of_Stats);
+					TTest_vals[i+j*Candidates.size()+k*Candidates.size()*Candidates.size()]=Testresult.Change[0].p;
+				}
+				else if (k == Candidates.size()-1){
+					loc = {Candidates[i],Candidates[j]};
+					Test(loc,Table,false,false,Testresult,List_of_Stats);
+					TTest_vals[i+j*Candidates.size()+k*Candidates.size()*Candidates.size()]=Testresult.Change[1].p;
+				}
+				else{
+					std::cout << "This should not have happened" << i << " " << j << " " << k << std::endl;
+				}
+			}
+		}
+	}
+
+	return TTest_vals;
+}
 
 //This routine returns a vector of p-values corresponding to the tested locations
-MC Multiple_TTest(std::vector<int> &locations, std::vector<MeanStd> &Table, bool Fish, bool Mid){
-	int locsize = locations.size();
-	std::vector<MeanStd> List_of_Stats(locsize+1);
+void Multiple_TTest(std::vector<int> &locations, std::vector<MeanStd> &Table, bool Fish, bool Mid, MC& Returning, std::vector<MeanStd>& List_of_Stats){
+	List_of_Stats.resize(locations.size()+1);
 	MeanStd First;
 	MeanStd Full;
 
-	std::vector<Changepoint> Result(locsize);
 	int before,after,division;
 	Changepoint next_changepoint;
+	Returning.Change.resize(locations.size()); //Linear on the number of elements inserted/erased
 	//Iterate through locations
-	for(int i = 0; i != locsize; i++) {
+	for(int i = 0; i != locations.size(); i++) {
 		if (i == 0){
 			List_of_Stats[0] = Table[locations[i]];
 			before = 0;
@@ -104,18 +142,22 @@ MC Multiple_TTest(std::vector<int> &locations, std::vector<MeanStd> &Table, bool
 		else{
 			next_changepoint.p=1.;
 		}
-		Result[i] = next_changepoint;
+		Returning.Change[i]  = next_changepoint;
 	}
 
-	MC Returning;
-	Returning.Change = Result;
-	if (Fish==true){
-		Returning.p = Fisher(Result);
+	//MC Returning;
+	if (Mid == false){
+		if (Fish==true){
+			Returning.p = Fisher(Returning.Change);
+		}
+		else{
+			Returning.p = LogComb(Returning.Change);
+		}
 	}
 	else{
-		Returning.p = LogComb(Result);
+		Returning.p = Returning.Change[1].p;
 	}
 
-	return Returning;
+	//return Returning;
 }
 
