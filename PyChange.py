@@ -36,7 +36,7 @@ def solve(seq, method):
     Apply method to sequence
     """
     cp = []
-    if method in ['MaChaMP', 'CUSUM', 'EWMA']:
+    if method in ['MaChaMP', 'CUSUM', 'EWMA', 'QChart']:
         C = CppChange(seq, method)
         cp = C.changepoints
         del C
@@ -58,7 +58,7 @@ def solve(seq, method):
         cp = Fpop(seq)
     else:
         print "Not a known module"
-        cp = [0]
+        cp = []
     return cp
 
 

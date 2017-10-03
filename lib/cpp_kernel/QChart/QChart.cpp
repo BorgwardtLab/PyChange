@@ -71,10 +71,13 @@ def QChart(seq,maxlike=5. (my analysis maxlike=6.5)):
         run_length++;
         if(i>skip){
             stat = std::sqrt((run_length-1)/run_length) * (sequence[i-1]-mean)/std::sqrt(M2/run_length);
+            std::cout << std::sqrt(float(run_length-1)/run_length)* (sequence[i-1]-mean)/std::sqrt(M2/run_length) << " "; //here is non zero
             boost::math::students_t_distribution<double> distst(run_length-2);
             boost::math::normal_distribution<double> distnorm;
             stat = boost::math::cdf(boost::math::complement(distst, fabs(stat)));
-            stat = boost::math::pdf(distnorm,stat);
+            stat = boost::math::quantile(boost::math::complement(distnorm,fabs(stat)));
+            std::cout << stat << " "; //here is zero
+
 
 
             chart_0 = chart_0+ stat - stat_3;
@@ -84,6 +87,7 @@ def QChart(seq,maxlike=5. (my analysis maxlike=6.5)):
             if(stat_3>0){
                 chart_1 = chart_1 -1;
             }
+            std::cout << chart_1 << " " << chart_0 << std::endl;
 
             if ((chart_1 < 1 || chart_1 > 4) && (std::abs(chart_0) > maxlike)){
                 Return_MCP.locations.push_back(i);
