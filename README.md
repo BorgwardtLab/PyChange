@@ -28,6 +28,9 @@ Store your time series in a .csv file and run PyChange.
 `--time`: Name of column of timepoints.    
 
 `--method`: Type of change detection method.   
+- `CUSUM`: Pages Cummulative sum control chart. (h=8.01, k=0.25).     
+- `EWMA`: Expoentially weighted moving average control chart. (burn-in period 30, lambda = 0.05, L=3.7).  
+- `QChart`: For start up processes and short runs (3o3, maxlike=2.).   
 - `PELT`: **default** Linear method based on dynamic programming from the popular r-package [changepoint](https://cran.r-project.org/web/packages/changepoint/index.html). 
 - `SMUCE`: For changes at different scales using the r-package [stepR](https://cran.r-project.org/web/packages/stepR/index.html).    
 - [`WBS`](https://cran.r-project.org/web/packages/wbs/index.html): Stochastic method. 
@@ -49,7 +52,7 @@ If `--filename=Name.csv`, the output is a `ChangesName.csv` file. The columns ar
 ## Use as a module  
 
 ```
-import nump as np
+import numpy as np
 from PyChange import PyChange
 
 r = np.random.RandomState(42)
