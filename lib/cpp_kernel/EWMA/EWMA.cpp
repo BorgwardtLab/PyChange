@@ -10,14 +10,14 @@ struct MCP{
 */
 
 
-MCP EWMA(std::vector<double> sequence);
+MCP EWMA(std::vector<double> sequence,std::vector<double> time);
 
 
 
 
 
 
-MCP EWMA(std::vector<double> sequence){
+MCP EWMA(std::vector<double> sequence, std::vector<double> time){
     /*
     def EMWA(seq, parameters=[0.11, 3.74], onset=30): #does not work
     l = parameters[0] #recommended 0.05-0.2
