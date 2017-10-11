@@ -2,8 +2,8 @@
 //Retrun type, loaded in ./MaChaMP/MaChaMP.cpp
 /*
 struct MCP{
-	std::vector<int>  locations = {}; //indices in sequence
-	long double p_value =1.; //p-vlaue
+    std::vector<int>  locations = {}; //indices in sequence
+    long double p_value =1.; //p-vlaue
             int window = 2;  // Window-size
             long double threshold; // Threshold of candidates
 };
@@ -51,8 +51,8 @@ def QChart(seq,maxlike=5. (my analysis maxlike=6.5)):
     */
 
     MCP Return_MCP;
-    double maxlike = 2.;
-    int burn_in_length = 2;
+    double maxlike = 2.1;
+    int burn_in_length = 3;
 
     double mean = 0.;
     double M2 = 0.;
@@ -60,6 +60,8 @@ def QChart(seq,maxlike=5. (my analysis maxlike=6.5)):
     double stat_1 = 0;
     double stat_2 = 0;
     double stat_3 = 0;
+    double stat_4 = 0;
+    double stat_5 = 0;
     double chart_0 = 0.;
     double chart_1 = 0.;
 
@@ -74,23 +76,37 @@ def QChart(seq,maxlike=5. (my analysis maxlike=6.5)):
             //std::cout << i << " " << std::sqrt(float(run_length-1)/run_length)* (sequence[i-1]-mean)/std::sqrt(M2/run_length) << " "; //here is non zero
             boost::math::students_t_distribution<double> distst(run_length-2);
             boost::math::normal_distribution<double> distnorm;
-            stat = boost::math::cdf(boost::math::complement(distst, fabs(stat)));
-            //std::cout << stat << " ";
-            stat = boost::math::quantile(boost::math::complement(distnorm,fabs(stat)));
-            //std::cout << stat << " "; //here is zero
+            if (std::isnan(stat)==false && std::isinf(stat) == false){
+                stat = boost::math::cdf(boost::math::complement(distst, fabs(stat)));
+                //std::cout << stat << " ";
+                stat = boost::math::quantile(boost::math::complement(distnorm,fabs(stat)));
+                //std::cout << stat << " "; //here is zero
+            }
+            else{
+                if(std::isnan(stat)==true){
+                    //std::cout << i << " " << M2 << " " << run_length << " " << (float)(run_length-1)/run_length << std::endl;
+                    stat=stat_1;
+                }
+                else{
+                    stat = stat_1+maxlike;
+                }
+            }
 
 
-            // 3 out of 3 test : too many FP
+            // 4 out of 5 test : too many FP
             chart_0 = stat;
             if(stat > maxlike){
                 chart_1 = chart_1 +1;
             }
-            if(stat_3> maxlike){
-                chart_1 = chart_1 -1;
+            //if(stat_5> maxlike){
+            //    chart_1 = chart_1 -1;
+            //}
+            if(stat_3 > maxlike){
+              chart_1 = chart_1 -1;
             }
             //std::cout << chart_1 << " " << chart_0 << std::endl;
-
             if ((chart_1 > 2) && (std::abs(chart_0) > maxlike)){
+            //if ((chart_1 > 3) && (std::abs(chart_0) > maxlike)){
                 Return_MCP.locations.push_back(i);
                 skip = i+burn_in_length;
 
@@ -107,6 +123,8 @@ def QChart(seq,maxlike=5. (my analysis maxlike=6.5)):
         }
 
         Welford(mean,M2,run_length,sequence[i-1]);
+        stat_5 = stat_4;
+        stat_4 = stat_3;
         stat_3 = stat_2;
         stat_2 = stat_1;
         stat_1 = stat;
