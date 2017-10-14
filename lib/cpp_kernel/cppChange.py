@@ -29,7 +29,7 @@ def create_lib(n):
         lib.vector_get.argtypes = [c_void_p, c_int]
         lib.vector_push_back.restype = None
         lib.vector_push_back.argtypes = [c_void_p, c_double]
-        lib.change.argtypes = [c_void_p, c_char_p, c_double * n, c_double * n, c_int]
+        lib.change.argtypes = [c_void_p, c_char_p, c_double * n, c_int]
         lib.change.restype = None
 
         def __init__(self):
@@ -53,26 +53,11 @@ def create_lib(n):
         def push(self, j):  # push calls vector's push_back
             Vector.lib.vector_push_back(self.vector, c_double(j))
 
-        def change(self, filename, seq, time):  # foo in Python calls foo in C++
+        def change(self, filename, seq):  # foo in Python calls foo in C++
             arr = (c_double * len(seq))(*seq)
-            timearr = (c_double * len(time))(*time)
-            Vector.lib.change(self.vector, c_char_p(filename), arr, timearr, c_int(len(seq)))
+            Vector.lib.change(self.vector, c_char_p(filename), arr, c_int(len(seq)))
 
     return Vector
-
-
-def decompose(seq):
-    if len(seq) == 2 and len(seq[0]) > 0:  # The case of seq[0]=vals, seq[1]=timepoints
-        return seq[0], seq[1]
-    if len(seq) > 2 and len(seq[0]) > 0:  # The case of seq[i]=vals_i
-        seqarr = []
-        timearr = []
-        for subseq in seq:
-            seqarr.extend(subseq)
-            timearr.extend(range(len(subseq)))
-        return seqarr, timearr
-    else:
-        return seq, range(len(seq))
 
 
 class CppChange:
@@ -80,13 +65,11 @@ class CppChange:
     def __init__(self, seq, method):
         gc.collect()
 
-        seqarr, timearr = decompose(seq)  # Create or extract timepoints
-
         Vector = create_lib(len(seq))
         test = Vector()
 
         start = time.time()
-        loc = test.change(method, seqarr, timearr)
+        loc = test.change(method, seq)
         self.duration = time.time() - start
 
         number = int(test[0])

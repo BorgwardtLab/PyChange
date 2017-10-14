@@ -7,10 +7,9 @@
 
 extern "C" {
     // Changepoint detection on the vector v
-    void change(std::vector<double>* v,const char* TEST, double *seqarr, double *timearr, int length){
+    void change(std::vector<double>* v,const char* TEST, double *seqarr, int length){
         // It is possible to change the testing function here, K-S test or Mann-Whitney, for instance
         std::vector<double> seq(seqarr, seqarr + length);
-        std::vector<double> time(timearr, timearr + length);
 
         MCP Result;
         if (strcmp(TEST,"MaChaMP")==0 ){
@@ -20,7 +19,7 @@ extern "C" {
             Result = CUSUM(seq);
         }
         else if(strcmp(TEST,"EWMA")==0 ){
-            Result = EWMA(seq,time);
+            Result = EWMA(seq);
         }
         else if(strcmp(TEST,"QChart")==0 ){
             Result = QChart(seq);
