@@ -1,0 +1,18 @@
+#!/bin/bash
+
+cd ./lib/cpp_kernel
+g++ -std=c++14 -c -fPIC _main.cpp -o MC.o
+g++ -shared -Wl,-install_name,MC.so -o MC.so MC.o
+cd ..
+cd ..
+python Nile.py
+python Example.py
+
+#python comparsion/Main.py 20 all 100 02
+#python3 comparsion_ex/Main.py 20 all 100 02
+#python Dimension_around_CP/pvalsurface.py
+#python fractal_dimension/Main.py delta 100 100
+#python Motivating\ case/Test_TTest.py #revise it!!!
+#python real_data/Climate_data/Main.py
+#python real_data/toothpaste/Main.py #DP red dotted line
+#python real_data/public_drunkenness/Main.py #DP red dotted line

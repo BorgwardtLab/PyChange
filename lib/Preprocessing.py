@@ -20,7 +20,15 @@ def preprocessing(seq, transform):
         seq = percdiff(seq)
     elif transform == 'logpercdiff':
         seq = logpercdiff(seq)
+    elif transform == 'std':
+        seq = standardize(seq)
     return seq
+
+
+def standardize(seq):
+    mean_zero = [i - np.mean(seq) for i in seq]
+    var_one = [i / np.std(seq) for i in mean_zero]
+    return var_one
 
 
 def diff(seq):

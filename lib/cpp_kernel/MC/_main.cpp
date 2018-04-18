@@ -1,28 +1,14 @@
-#include "Algorithms.cpp"
-#include "./MC/MaChaMP.cpp"
-#include "./CUSUM/CUSUM.cpp"
-#include "./EWMA/EWMA.cpp"
-#include "./QChart/QChart.cpp"
+#include "MaChaMP.cpp"
 
 
 extern "C" {
     // Changepoint detection on the vector v
-    void change(std::vector<double>* v,const char* TEST, double *seqarr, int length){
+    void change(std::vector<double>* v,const char* TEST, double *arr, int length){
         // It is possible to change the testing function here, K-S test or Mann-Whitney, for instance
-        std::vector<double> seq(seqarr, seqarr + length);
-
+        std::vector<double> seq(arr, arr + length);
         MCP Result;
-        if (strcmp(TEST,"MaChaMP")==0 ){
+        if (strcmp(TEST,"Welch-Fisher")==0 ){
             Result = MaChaMP(seq,Multiple_TTest);
-        }
-        else if(strcmp(TEST,"CUSUM")==0 ){
-            Result = CUSUM(seq);
-        }
-        else if(strcmp(TEST,"EWMA")==0 ){
-            Result = EWMA(seq);
-        }
-        else if(strcmp(TEST,"QChart")==0 ){
-            Result = QChart(seq);
         }
         else {
             std::cout<< "Unrecognized testing framework" << std::endl;
@@ -204,8 +190,8 @@ TEST(Boxcount,ExamplesIndex){
     EXPECT_EQ(std::make_tuple(2,2), Box_index(5,99.923,2,2,95));
     EXPECT_EQ(std::make_tuple(0,0), Box_index(0,0,2,2,0));
 }
-
-
+*/
+/* // Has to be rewritten
 TEST(Boxcount, Brownian){
     std::mt19937 gen(0);
     std::normal_distribution<long double> norm(0,1.);
@@ -218,7 +204,7 @@ TEST(Boxcount, Brownian){
     std::iota(index.begin(),index.end(),0);
 
     // There is a bias twoards small BCD, therefore 0.3
-    EXPECT_NEAR(1.5,BCD(BM,index),0.3);
+    EXPECT_NEAR(1.5,BCD(std::make_tuple(BM,index),length),0.3);
 }
 
 
@@ -240,7 +226,9 @@ TEST(Boxcount, Order){
     EXPECT_TRUE(BCD(BMsmall,index)< BCD(BMlarge,index));
 }
 
+*/
 
+/*
 
 // T-Test and stuff
 
@@ -291,6 +279,6 @@ TEST(TTest, mean_var){
     }
 }
 
-*/
 
+*/
 

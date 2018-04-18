@@ -22,7 +22,7 @@ from lib.Segmentor3IsBack.Segmentor3IsBack import Segmentor3IsBack
 from lib.Fpop.Fpop import Fpop
 
 
-def PyChange(seq, transform='none', method='PELT'):
+def PyChange(seq, transform='std', method='PELT'):
     """
     Changepoint detection of input sequence
     """
