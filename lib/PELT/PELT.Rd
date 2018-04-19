@@ -12,7 +12,7 @@ ts.xts <- read.zoo('./lib/PELT/TS.csv',index=0)
 #ts = ts(nums)
 
 ser = ts(ts.xts)
-mvalue = cpt.mean(ser, method='PELT')#,penalty='Manual',pen.value='0.05')
+mvalue = cpt.meanvar(ser, method='PELT')#,penalty='Manual',pen.value='0.05')
 #cat(cpts(mvalue))
 
 

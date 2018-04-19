@@ -35,21 +35,23 @@ def diff(seq):
     """
     Take differences from sequence
     """
-    return [i - j for i, j in zip(seq[1:], seq[:-1])]
+    return standardize([i - j for i, j in zip(seq[1:], seq[:-1])])
 
 
 def logpercdiff(seq):
     """
     Take log percentile differences from sequence
     """
-    return [[np.log((np.abs(i - j) * (i + j) / 2.) + 1.) for i, j in zip(seq[1:], seq[:-1])]]
+    return [np.log((np.abs(i - j) * (i + j) / 2.) + 1.) for i, j in zip(seq[1:], seq[:-1])]
 
 
 def logdiff(seq):
     """
     Take log differences from sequence
     """
-    return [[np.log(np.abs((i - j)) + 1.) for i, j in zip(seq[1:], seq[:-1])]]
+    #seq = [[np.abs(np.log(np.abs(i + 1)) - np.log(np.abs(j + 1))) for i, j in zip(seq[1:], seq[:-1])]]
+    seq = standardize([np.log(np.abs(i - j) + 1.) for i, j in zip(seq[1:], seq[:-1])])
+    return seq
 
 
 def precdiff(seq):
