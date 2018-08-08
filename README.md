@@ -30,15 +30,7 @@ Store your time series in a .csv file and run PyChange.
 `--method`: Type of change detection method.   
 - `CUSUM`: Pages Cummulative sum control chart. (h=8.01, k=0.25).     
 - `EWMA`: Expoentially weighted moving average control chart. (burn-in period 30, lambda = 0.05, L=3.7).  
-- `QChart`: For start up processes and short runs (3o3, maxlike=2.).   
-- `PELT`: **default** Linear method based on dynamic programming from the popular r-package [changepoint](https://cran.r-project.org/web/packages/changepoint/index.html). 
-- `SMUCE`: For changes at different scales using the r-package [stepR](https://cran.r-project.org/web/packages/stepR/index.html).    
-- [`WBS`](https://cran.r-project.org/web/packages/wbs/index.html): Stochastic method. 
-- `E-Divise`: Non-parametric offline from the r-package [ecp](https://cran.r-project.org/web/packages/ecp/index.html).    
-- `Lepage`: Non-parametric online method using [cpm](https://cran.r-project.org/web/packages/cpm/index.html).   
-- [`Segmentor3IsBack`](https://cran.r-project.org/web/packages/Segmentor3IsBack/index.html): An r-package for Seq-data.  
-- [`Fpop`](https://r-forge.r-project.org/R/?group_id=1851): OP using functional pruining for large data.   
-- [`BCP`](https://cran.r-project.org/web/packages/bcp/index.html): Bayesian changepoint analysis.   
+- `QChart`: For start up processes and short runs (3o3, maxlike=2.).    
 
 `--preprocessing`: Transformation of sequence before applying change detection. 
 - `none`: **default**  Raw sequence, for change in mean.     
