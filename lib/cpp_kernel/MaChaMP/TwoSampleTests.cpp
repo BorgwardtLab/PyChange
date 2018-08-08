@@ -18,6 +18,10 @@ long double two_samples_t_test_unequal_sd(
         unsigned Sn2)     		// Sn2 = Sample 2 Size.
 {
 	// Degrees of freedom:
+    if (Sn1 == 0 || Sn2 == 0){
+        return 1.;
+    }
+    else{
 	double v = Sd1 * Sd1 / Sn1 + Sd2 * Sd2 / Sn2;
 	v *= v;
 	double t1 = Sd1 * Sd1 / Sn1;
@@ -35,5 +39,6 @@ long double two_samples_t_test_unequal_sd(
 	long double q = 2* boost::math::cdf(boost::math::complement(distst, fabs(t_stat)));
 	// q is a p-value
 	return q;
+    }
 }
 

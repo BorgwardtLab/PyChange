@@ -34,7 +34,6 @@ if __name__ == "__main__":
             loc = PyChange(seq, method=m)
         else:
             loc = []
-        print m, loc
         if len(loc) >= len(seq) - 5:
             ax_b = a.twinx()
             ax_b.plot(loc, color=c, linewidth=2)

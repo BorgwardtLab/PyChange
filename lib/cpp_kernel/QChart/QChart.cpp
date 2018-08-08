@@ -98,14 +98,14 @@ def QChart(seq,maxlike=5. (my analysis maxlike=6.5)):
             if(stat > maxlike){
                 chart_1 = chart_1 +1;
             }
-            //if(stat_5> maxlike){
-            //    chart_1 = chart_1 -1;
-            //}
-            if(stat_3 > maxlike){
-              chart_1 = chart_1 -1;
+            if(stat_5> maxlike){
+                chart_1 = chart_1 -1;
             }
+            //if(stat_3 > maxlike){
+            //  chart_1 = chart_1 -1;
+            //}
             //std::cout << chart_1 << " " << chart_0 << std::endl;
-            if ((chart_1 > 2) && (std::abs(chart_0) > maxlike)){
+            if ((chart_1 > 3)){//} && (std::abs(chart_0) > maxlike)){
             //if ((chart_1 > 3) && (std::abs(chart_0) > maxlike)){
                 Return_MCP.locations.push_back(i);
                 skip = i+burn_in_length;

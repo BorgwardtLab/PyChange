@@ -12,14 +12,6 @@ from lib.Preprocessing import preprocessing
 
 
 from lib.cpp_kernel.cppChange import CppChange
-from lib.E_Divise.E_Divise import E_Divise
-from lib.PELT.PELT import PELT
-from lib.WBS.WBS import WBS
-from lib.SMUCE.SMUCE import SMUCE
-from lib.BCP.BCP import BCP
-from lib.CPM.CPM import CPM as Lepage
-from lib.Segmentor3IsBack.Segmentor3IsBack import Segmentor3IsBack
-from lib.Fpop.Fpop import Fpop
 
 
 def PyChange(seq, transform='std', method='PELT'):
@@ -40,24 +32,8 @@ def solve(seq, method):
         C = CppChange(seq, method)
         cp = C.changepoints
         del C
-    elif method == 'PELT':
-        cp = PELT(seq)
-    elif method == 'WBS':
-        cp = WBS(seq)
-    elif method == 'SMUCE':
-        cp = SMUCE(seq)
-    elif method == 'E-Divise':
-        cp = E_Divise(seq)
-    elif method == 'BCP':
-        cp = BCP(seq)
-    elif method == 'Lepage':
-        cp = Lepage(seq)
-    elif method == 'Segmentor3IsBack':
-        cp = Segmentor3IsBack(seq)
-    elif method == 'Fpop':
-        cp = Fpop(seq)
     else:
-        print "Not a known module"
+        print("Not a known module")
         cp = []
     return cp
 
@@ -95,7 +71,6 @@ if __name__ == "__main__":
     for c in cells:
         seq = data[data[cell] == c][TF].dropna().values.tolist()
         cp = PyChange(seq, transform, method)
-        print len(seq), cp
         changes = pd.concat((changes, pd.DataFrame({'CellID': [c] * len(cp), 'CP': cp, 'Timepoint': [data[(data[cell] == c) & (data[TF] == seq[change])][time].values.tolist()[0] for change in cp]})), ignore_index=True)
 
     changes.to_csv('Changes' + name)

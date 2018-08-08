@@ -1,4 +1,4 @@
-//#include "../Algorithms.cpp"
+#include "../Algorithms.cpp"
 
 
 
@@ -96,7 +96,7 @@ double BCD(std::tuple<std::vector<long double>,std::vector<int>> log_sample, int
     // First iteration
     listk.push_back(big_k-exclude_exponents);
     while ( Nepsilon.size() < big_k - std::pow(2,exclude_exponents) - 1){
-        Nepsilon.push_back( Ne(logseq,index,listk.back(),n,big_k,u,m) ); //We do not have log2 here because it cancels out with 2**x earlier
+        Nepsilon.push_back( Ne(logseq,index,listk.back(),n,big_k,u,m)) ; //We do not have log2 here because it cancels out with 2**x earlier
         logepsilon.push_back(k_to_logepsilon(listk.back(),big_k,n));
         listk.push_back(listk.back()-1);
     }

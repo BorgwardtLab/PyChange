@@ -10,6 +10,30 @@ extern "C" {
         if (strcmp(TEST,"Welch-Fisher")==0 ){
             Result = MaChaMP(seq,Multiple_TTest);
         }
+        else if (strcmp(TEST,"Stage0")==0 ){
+            Result = Stage_random(seq,Multiple_TTest);
+        }
+        else if (strcmp(TEST,"Stage1")==0 ){
+            Result = Stage_random_recomb(seq,Multiple_TTest);
+        }
+        else if (strcmp(TEST,"Stage2")==0 ){
+            Result = Stage_window(seq,Multiple_TTest);
+        }
+        else if (strcmp(TEST,"Stage31")==0 ){//seqsize/10
+            Result = Stage_window_recomb(seq,Multiple_TTest);
+        }
+        else if (strcmp(TEST,"Stage32")==0 ){//log2seq.size
+            Result = Stage_window_recomb_bad(seq,Multiple_TTest);
+        }
+        else if (strcmp(TEST,"Stage33")==0 ){//random window size
+            Result = Stage_window_recomb_random(seq,Multiple_TTest);
+        }
+        else if (strcmp(TEST,"Stage4")==0 ){
+            Result = Stage_dimension(seq,Multiple_TTest);
+        }
+        else if (strcmp(TEST,"Fixed")==0 ){
+            Result = Stage_fixed_alpha(seq,Multiple_TTest);
+        }
         else {
             std::cout<< "Unrecognized testing framework" << std::endl;
         }

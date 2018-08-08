@@ -14,7 +14,7 @@ if __name__ == "__main__":
     seq = list(r.randn(100)) + list(r.randn(100) + 1.) + list(r.randn(100))  # + list(r.randn(100) + 1.)
     f, ((ax1, ax2, ax7), (ax3, ax4, ax8), (ax5, ax6, ax9)) = plt.subplots(3, 3, sharex=True, sharey=True, figsize=(10, 10))
     axis = [ax1, ax2, ax7, ax4, ax3, ax8, ax6, ax9, ax5]
-    methods = ['PELT', 'MaChaMP', 'FPOP', 'CUSUM', 'EWMA', 'QChart', 'E-Divise', 'SMUCE', 'BCP']  # ['MaChaMP', 'PELT', 'WBS', 'SMUCE', 'E-Divise', 'BCP', 'Lepage', 'EWMA', 'Fpop']
+    methods = ['', 'MaChaMP', '', 'CUSUM', 'EWMA', 'QChart', '', '', '']  # ['MaChaMP', 'PELT', 'WBS', 'SMUCE', 'E-Divise', 'BCP', 'Lepage', 'EWMA', 'Fpop']
     color = ['darkblue', 'darkred', 'darkorange', 'olive', 'gold', 'teal', 'salmon', 'steelblue', 'rosybrown']  # ['darkblue', 'darkred', 'darkorange', 'olive', 'gold', 'teal', 'salmon', 'steelblue', 'rosybrown']
 
     for a, m, c in zip(axis, methods, color):
@@ -23,7 +23,6 @@ if __name__ == "__main__":
             loc = PyChange(seq, method=m)
         else:
             loc = []
-        print m, loc
         if len(loc) >= len(seq) - 5:
             ax_b = a.twinx()
             ax_b.plot(loc, color=c, linewidth=2)

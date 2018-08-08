@@ -1,5 +1,5 @@
 #include "Multiple_TTest.cpp"
-#include <algorithm>
+
 
 std::vector<long double> DM( int window, std::function<void(std::vector<int> &,std::vector<MeanStd> &, bool, bool,MC&, std::vector<MeanStd>& )> Test, std::vector<MeanStd> Table);
 
@@ -11,7 +11,6 @@ std::tuple<std::vector<long double>,std::vector<int>> log_sample(std::vector<int
 
 //What we want is a random subsequence of DM
 std::tuple<std::vector<long double>,std::vector<int>> log_sample(std::vector<int> rand_index, std::function<void(std::vector<int> &,std::vector<MeanStd> &, bool, bool,MC&, std::vector<MeanStd>& )> Test, std::vector<MeanStd> Table, int window){
-
     std::mt19937 gen(Table.size());
     std::uniform_int_distribution<int> uni(0,Table.size());
     int start = uni(gen) % rand_index.size();
@@ -39,10 +38,6 @@ std::tuple<std::vector<long double>,std::vector<int>> log_sample(std::vector<int
         DM_sample.push_back(std::log(Test_Return.p));
         //DM_sample.push_back(std::log(Test(loc,Table,true,true).p));
     }
-
-    //std::vector<long double> DM_sample = DM(window,Test,Table );
-    //std::vector<int> index (DM_sample.size());
-    //std::iota(index.begin(),index.end(),0);
     return std::make_tuple(DM_sample,index);
 }
 
@@ -67,7 +62,7 @@ std::vector<long double> DM(int window, std::function<void(std::vector<int> &,st
 
 
 std::vector<Changepoint> Candidate_extraction(std::vector<long double> dissimilarity_manifold, int window, bool Hack){
-    std::vector<Changepoint> Candidates = {};
+    std::vector<Changepoint> Candidates;
 
     long double Reference;
     if (Hack == false){
@@ -99,20 +94,9 @@ std::vector<Changepoint> Candidate_extraction(std::vector<long double> dissimila
         }
 
     }
-    std::vector<size_t> index_cand_val;
-    if(cand_val.size() > (int) std::log2(static_cast<int>(dissimilarity_manifold.size()))){
-        index_cand_val = topk_index(cand_val, (int) std::log2(static_cast<int>(dissimilarity_manifold.size())));
-    }
-    else if(cand_val.size()>1){
-        index_cand_val.resize(cand_val.size());
-        std::iota(begin(index_cand_val), end(index_cand_val), static_cast<size_t>(0));
-    }
-    else if(cand_val.size()==1){
-        index_cand_val = {0};
-    }
-    else{
-        index_cand_val = {};
-    }
+
+
+    std::vector<size_t> index_cand_val = topk_index(cand_val, (int) std::log2(static_cast<int>(dissimilarity_manifold.size())));
 
     std::sort(index_cand_val.begin(),index_cand_val.end());
 
