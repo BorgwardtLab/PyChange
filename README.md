@@ -5,7 +5,7 @@
 ### Example1: Differences in two sequences.  
 
 ```
-python PyChange.py --filename=random.csv --cell=B --values=A --time=T --method=PELT --preprocessing=diff
+python3 PyChange.py --filename=random.csv --cell=B --values=A --time=T --method=CUSUM --preprocessing=diff
 ```
 
 Computes the changes in trend in two sequences stored in `random.csv` with the `MaChaMP` method. One of the sequences has a significant trend change, the other does not.   
@@ -13,7 +13,7 @@ Computes the changes in trend in two sequences stored in `random.csv` with the `
 ### Example2: Comparsion of methods.   
 
 ```
-python Example.py
+python3 Example.py
 ```
 
 Creates [`Example.pdf`](./Example.pdf), where all available methods are applied to the same step function.    
