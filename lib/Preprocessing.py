@@ -54,7 +54,7 @@ def logdiff(seq):
     return seq
 
 
-def precdiff(seq):
+def percdiff(seq):
     """
     Take percentile diffrerence from sequence
     """
